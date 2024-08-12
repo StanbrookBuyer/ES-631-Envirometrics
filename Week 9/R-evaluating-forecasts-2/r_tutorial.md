@@ -1,24 +1,3 @@
----
-title: "R Tutorial"
-weight: 3
-type: book
-summary: R tutorial on evaluating forecasts and forecast models
-show_date: false
-editable: true
----
-
-*Video tutorials are based on the old `forecast` package.*
-*Text tutorials have been updated to use `fable` and associated packages.*
-
-## Video Tutorials
-
-### Evaluating Uncertainty Using Coverage
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/hGlnIVYFUgg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-### Evaluating How Forecast Accuracy Changes With Forecast Horizon
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/DHOfUYLnshA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Written Tutorial
 
