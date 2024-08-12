@@ -1,24 +1,3 @@
----
-title: "R Tutorial"
-weight: 3
-type: book
-summary: R tutorial on evaluating forecasts and forecast models
-show_date: false
-editable: true
----
-
-*Video tutorials are based on the old `forecast` package.*
-*Text tutorials have been updated to use `fable` and associated packages.*
-
-## Video Tutorials
-
-### Hindcasting & Visual Evaluation
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/ODmOr76QnWc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-### Quantitative Evaluation of Point Estimates
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/h0Igk8uOXKc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Written Tutorial
 
