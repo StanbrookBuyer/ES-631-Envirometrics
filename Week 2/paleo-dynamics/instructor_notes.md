@@ -1,11 +1,4 @@
----
-title: "Instructor Notes"
-weight: 4
-type: book
-summary: " "
-show_date: false
-editable: true
----
+
 
 #### Pre-discussion Introduction
 * Instructor notes: Most students have little to no knowledge of the large changes in environment that have occurred even fairly recently. The goal of this unit is to expose students to the idea that dynamics are natural and that the past can be useful for understanding the future. Because of the limited exposure students have to dynamics - and especially paleoecology - a brief introduction explaining why they are reading about this can be useful for setting the stage for the discussion. Below is an example introduction to the unit.
