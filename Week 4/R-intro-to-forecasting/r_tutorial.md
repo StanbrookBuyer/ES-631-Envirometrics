@@ -1,22 +1,4 @@
----
-title: "R Tutorial"
-weight: 3
-type: book
-summary: R tutorial on making forecasts from time-series models using the forecast package
-show_date: false
-editable: true
----
-
-## Video Tutorials
-
-*Video tutorials are based on the old `forecast` package.*
-*Text tutorials have been updated to use `fable` and associated packages.*
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/kyPg3jV4pJ8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/govzki35PIQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-## Text Tutorial
+ Tutorial
 
 ### Setup
 
