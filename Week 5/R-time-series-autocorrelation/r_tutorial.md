@@ -1,55 +1,3 @@
----
-title: "R Tutorial"
-weight: 3
-type: book
-summary: " "
-show_date: false
-editable: true
----
-## Time Series Autocorrelation in R
-### Video Tutorial
-
-1. Watch Introduction to exploring autocorrelation
-<iframe width="560" height="315" src="https://www.youtube.com/embed/iSfRh8nxAgI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-2. Watch Generating randomt time series in R
-<iframe width="560" height="315" src="https://www.youtube.com/embed/iO3yXnnSksM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-3. Import portal_timeseries.csv in R using read.csv. 
-Convert the NDVI data column into a time series object using ts(). Name that time series object: NDVI.ts
-Convert the rodent column into a time series object using ts(). Name that time series object: rats.ts 
-Convert the rain column into a time series object using ts(). Name that time series object: rain.ts
-(Why am I telling you what to name these things? So that when I type code in the video, it is easier for you to follow along. That's all!)
-
-4. Watch Exploring autocorrelation through lag plots
-<iframe width="560" height="315" src="https://www.youtube.com/embed/V-4W8Wl-H9E" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-5. Generate a lag plot for rats.ts using lag.plot() 
-
-6. Watch Using acf() in R to explore autocorrelation
-<iframe width="560" height="315" src="https://www.youtube.com/embed/deV2SlJ2Dnw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-7. Generate an acf plot for rain.ts using acf()
-Generate an acf plot for rats.ts using acf()
-
-8. Watch Autoregressive vs. moving average processes
-<iframe width="560" height="315" src="https://www.youtube.com/embed/KXsYYhdkjgs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-9. Watch Using pacf() to diagnose time lags for autoregressive models
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4W9uI4pjc8U" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-10. Using tsdisplay() examine the acf and pacf for NDVI.ts
-Using tsdisplay() examine the acf and pacf for rain.ts
-
-11. Watch Exploring lagged correlations between different time series
-<iframe width="560" height="315" src="https://www.youtube.com/embed/dKDgihvtZGk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-12. Plot the lag plot comparing NDVI.ts and rats.ts
-Generate the ccf plot comparing NDVI.ts and rats.ts
-
-13. Submit your r code (either as a file or cut and paste text) through the assignment for this module in the course canvas site.
-
----
 
 Last week we talked about the different time scales as one type of signal that was embedded in a timeseries. This week we're going to talk about a different issue with time series. 
 
@@ -58,8 +6,6 @@ Let's start by thinking about an extreme case of a time series.
 DRAW ON BOARD NORMAL DISTRIBUTION CENTERED AT ZERO 
 
 Say I have a normal distribution centered on zero and at each time step I randomly draw a value from the distribution. If I plotted this time series, what do you think it would look like? 
-
-HAVE THEM WALK YOU THROUGH DRAWING THE TIME SERIES.
 
 (the point you want them to get from this is that the choice of the value at time t is not dependent on its value at t-1)
 
@@ -142,9 +88,6 @@ ACF(whitenoise, wn, lag_max=12) |> autoplot()
 No correlations go above the blue lines. You can sometimes get a spike edging above the blue lines even with white noise. Sometimes randomess can result in correlations but they should not be very strong. 
 
 If there's a pattern to your spikes, that is usually another good sign that you have autocorrelation structure in your time series
-
-**HAVE STUDENTS LOAD do the lag plot and ACF for precip and rodents. Tell them to do PPT first then rodents, their reaction to the rodent plot
-will be a signal for when they've finished the exercise**
 
 ```{r}
 gg_lag(data_ts, rain, geom= "point") + labs(x= "lagged value")
