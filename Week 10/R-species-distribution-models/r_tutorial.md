@@ -31,7 +31,7 @@ library(terra)
 * For location data we'll use the Breeding Bird Survey of North America data on the Hooded Warbler
 * For environmental data we'll use minimum temperature and annual precipitation
 * Fore forecasts of environmental data we'll use CMIP5 50 year forecasts (CMIP = coupled model intercomparison project)
-* Download data from [https://course.naturecast.org/data/sdm_data.zip](https://course.naturecast.org/data/sdm_data.zip) and unzip it into your working directory
+* Download sdm data and unzip it into your working directory
 
 * The hooded warbler data is in a csv file
 * Load it using `read.csv()`
