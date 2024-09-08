@@ -1,8 +1,5 @@
 ### Written version of the lesson. It will vary from the videos, but the core info is the same.
-### You may find it helpful to watch the videos without "in R" in their title as these are more informative videos with visuals that are not  present in the written document.
-
 ## Inherent scales within a time series
-
 
 Talk about scales within the data often our data has some frequency of collection within a year interested in either focusing on that scale, or removing the effects of other scales. For example - seasonally adjusted housing sales or unemployment.
 
