@@ -21,10 +21,10 @@ Let's read in our data:
 data = read.csv('portal_timeseries.csv', stringsAsFactors = FALSE)
 head(data)
 ```
-This is a data file that we will be using for the next few weeks. This data is from my field site in Arizona. At my field site, called the Portal Project, we monitor rodents, plants, and weather. I've given you data here for each of these components: rodent abundance, precipitation amount in mm, and the plant data I've given you is actually NDVI, which is a measure of greenness that comes from satellites. This data is given in a format where each data point is associated with a specific month. Our data is not collected exactly a month apart, but this approach requires regularly collected data, so I've fudged things to make this data fit the constraints of this approach. You'll see that I have a date column that is not in the international date format. The first column is just a row index that I forgot to suppress when I made this file.
+This is a data file that we will be using for the next few weeks. This data is from a field site in Arizona. The field site, called the Portal Project, rodents, plants, and weather are monitored. I've given you data here for each of these components: rodent abundance, precipitation amount in mm, and the plant data I've given you is actually NDVI, which is a measure of greenness that comes from satellites. This data is given in a format where each data point is associated with a specific month. Our data is not collected exactly a month apart, but this approach requires regularly collected data, so I've fudged things to make this data fit the constraints of this approach. You'll see that I have a date column that is not in the international date format. The first column is just a row index that I forgot to suppress when I made this file.
 
 ## Converting data to a format better suited for timeseries analyses
-As we talked about on Thursday, dates and times have their own rules for how they operate and to simplify working with time series data, many packages require the data to be loaded into special formats that help the computer recognize and work with the data correctly. We're going to be working with the fpp3 package which was written by forecasters to help teach and conduct forecasting. fpp3 is a metapackage, which is a package that bundles multiple packages together. Ethan may have you work with the individual packages more directly, but we're going to start by letting fpp3 make things easy for us as we learn. Fpp3 uses a special format called a tsibble. A tsibble is essentially a nicely formatted dataframe that is designed specifically for time series data. 
+As we talked about in week two, dates and times have their own rules for how they operate and to simplify working with time series data, many packages require the data to be loaded into special formats that help the computer recognize and work with the data correctly. We're going to be working with the fpp3 package which was written by forecasters to help teach and conduct forecasting. fpp3 is a metapackage, which is a package that bundles multiple packages together. Ethan may have you work with the individual packages more directly, but we're going to start by letting fpp3 make things easy for us as we learn. Fpp3 uses a special format called a tsibble. A tsibble is essentially a nicely formatted dataframe that is designed specifically for time series data. 
 
 ```{r}
 library(fpp3)
@@ -40,39 +40,42 @@ So we're dealing with a different type of date object - the yearmonth, which is 
 head(data)
 ```
 We've got a row index column that I forgot to supress when I made this file. We have three value columns - NDVI, rain, and rodents. We have our original date column, which is being stored as character data, and our yearmonth column. 
-I imagine you're wondering why we dropped the day information. Many time series analyses require regularly sampled data. It can be hourly, daily, monthly, yearly, even quarterly, but there needs to be a regular spacing to the timing. Many time series approaches also struggle with gaps in the data - so missed months. The data you're working with is a processed version of our data where we have filled gaps by estimating the missing values and forced the data into a monthly structure. Later in the semester we'll learn an approach that can deal with irregular data but it is a lot more complicated, so we're going to start by working with the foundational analyses that require this regularity.
+I imagine you're wondering why we dropped the day information? Many time series analyses require regularly sampled data. It can be hourly, daily, monthly, yearly, even quarterly, but there needs to be a regular spacing to the timing. Many time series approaches also struggle with gaps in the data - so missed months. The data you're working with is a processed version of our data where we have filled gaps by estimating the missing values and forced the data into a monthly structure. Later in the semester we'll learn an approach that can deal with irregular data but it is a lot more complicated, so we're going to start by working with the foundational analyses that require this regularity.
 
-We're now doing to turn our datafile into a special type of data storage device called a tsibble. A tibble is essentially a dataframe. A tsibble is a time series tibble designed specifically to hold time series data and can hold multiple time series in the same object. We're going to give it our data and tell it where the time information is.
+We're now doing to turn our datafile into a special type of data storage device called a tsibble. A tibble is essentially a dataframe. A tsibble is a time series tibble (essentially a table in R language) that is designed specifically to hold time series data and can hold multiple time series in the same object. We're going to give it our data and tell it where the time information is.
 
 ```{r}
 data_ts = tsibble::as_tsibble(data, index=month)
 head(data_ts)
 ```
-Nothing has changed in how the data looks, except it is now identified as a tsibble.
+Nothing has changed in how the data looks, except it is now identified as a tsibble - success!.
 
-We can work with our tsibble like we would work with a dataframe using the commands in the dplyr package. We can drop columns we no longer want
+We can work with our tsibble like we would work with a dataframe using the commands in the dplyr package. We can drop columns we no longer want, like the X column. 
 
 ```{r}
 data_ts = select(data_ts, c(-date, -X))
 ```
 
-We can create subsets of our data, so if we only want the data after 2000.
+We can create subsets of our data, so if we only want the data after 2000. We aren't going to use this truncated dataframe just yet, but I thought it might be of use. 
 
 ```{r}
 ts_2000 = filter(data_ts, month > yearmonth("1999 Dec"))
 ```
 
-And we can plot our data
+And we can plot our data... 
 
 So, for example, we can plot this time series object without specifying the x or y axis because R knows this is a time series. We're going to use autoplot which is a function in R that automatically generates different types of plots based on the data object passed to it. We're going to give it our tsibble and the NDVI data and it will understand that this is a time series where the date information is being stored in the column we gave it when we created the tsibble.
 
 ```{r}
+library(forecast)
 autoplot(data_ts, NDVI)
-
 ```
 So here is the plot. As you can see we have a highly variable NDVI signal over time. We see some strong peaks and troughs, we see some regions with lower peaks and higher peaks that span multiple years. And there is a considerable amount of just variation over the time series.
 
-In every time series, there will be these multiple level of information - the variation happening from time step to time step, the variation happening over a sub-annual time scale (if you have sub-annual data), and the pattern that emerges over multiple years - increases over time or long-term cycles. 
+In every time series, there will be these multiple level of information - 
+(1) the variation happening from time step to time step, 
+(2) the variation happening over a sub-annual time scale (if you have sub-annual data), 
+(3) the pattern that emerges over multiple years - increases over time or long-term cycles. 
 
 We can think about this with the following equation. 
 Observed value = Trend + Seasonal Signal + Residual Variation
@@ -81,8 +84,6 @@ The goal of time series is to extract these different time scales of patterns so
 ### Extracting a trend
 
 So what we're going to do know is work through what time series decomposition is doing. 
-
-**Draw a multi-year time series on the board running with a section demarking months**
 
 The first step in time series decomposition is removing any long-term trends or cycles in the data. A moving average is a classic way of extracting the 'cross year' pattern in the data. What a moving average is doing is smoothing over the high frequency, or shorter-term fluctuations in the data so that the large-scale movements in the data become more apparent.
 
