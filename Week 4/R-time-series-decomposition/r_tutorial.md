@@ -166,7 +166,7 @@ Different approaches make different assumptions about the stability of the seaso
 
 If we want more flexibility in our seasonal signal, we have to use a more complicated approach. STL decomposition (Season Trend decomposition using Loess) is a slightly different approach for extracting the components from the time series. The residuals from these regressions contain the seasonal and residual variation. To extract the seasonal signal, the STL still calculates the average value for each month, but instead of using all years, it uses a sliding window of years to calculate the January average.
 
-**Illustrate on Board**
+** For Rosie: Illustrate on Board**
 
 And again, the residual or random variation is everything that is left over.
 ```{r}
