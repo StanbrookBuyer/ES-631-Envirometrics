@@ -5,6 +5,9 @@
 * Let's first load the packages we'll need for today
 
 ```r
+install.packages("fpp3", repos = "http://cran.us.r-project.org")
+
+library(fpp3)
 library(tsibble) # convert time-series data in a tsibble
 library(fable) # main package for modeling and forecasting with time-series data
 library(feasts) # time-series data visualization
@@ -12,14 +15,17 @@ library(dplyr) # data manipulation
 ```
 
 * Then load our data
+data = read.csv('portal_timeseries.csv', stringsAsFactors = FALSE)
+data$date<-as.Date(data$date, format = "%m/%d/%y")
+data = dplyr::mutate(data, month=tsibble::yearmonth(date))
+data_ts <-tsibble::as_tibble(data, index = month)
 
-```r
-data = read.csv("portal_timeseries.csv")
-data_ts <- raw_data |>
-  mutate(month = yearmonth(date)) |>
-  as_tsibble(index = month)
-data_ts
-```
+# Example conversion if not working 
+df <- as.data.frame(data_ts)# back into dataframe with month as an addition
+data_ts <- as_tsibble(df, index = month) # re-indexes month 
+dplyr::select(data_ts,c(-date,-X)) #removes date and X column
+autoplot(data_ts, NDVI)+geom_hline(yintercept = 0.18)
+
 
 * We're going to be working with the NDVI data
 * Reminder ourselves that that looks like
